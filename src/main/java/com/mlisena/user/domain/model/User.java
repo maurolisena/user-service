@@ -33,7 +33,7 @@ public class User {
     private String password;
 
     @Indexed
-    private boolean active = true;
+    private boolean active;
 
     @TextIndexed
     @CreatedDate
