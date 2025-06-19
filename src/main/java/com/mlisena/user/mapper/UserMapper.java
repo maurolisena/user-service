@@ -42,7 +42,7 @@ public class UserMapper {
             .build();
     }
 
-    public static void updateEntity(User user, CreateUserRequest createUserRequest) {
+    public static void toUpdateEntity(User user, CreateUserRequest createUserRequest) {
         user.setEmail(createUserRequest.email());
         user.setPassword(createUserRequest.password());
         user.setFirstName(createUserRequest.firstName());
