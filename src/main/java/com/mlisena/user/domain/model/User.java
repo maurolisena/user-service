@@ -1,17 +1,18 @@
 package com.mlisena.user.domain.model;
 
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.index.TextIndexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Document(collection = "users")
+@Entity
+@Table(name = "users")
 @Data
 @Builder
 @NoArgsConstructor
@@ -19,27 +20,15 @@ import java.util.UUID;
 public class User {
 
     @Id
-    private UUID id = UUID.randomUUID();
-
-    @TextIndexed
-    private String firstName;
-
-    @TextIndexed
-    private String lastName;
-
-    @Indexed(unique = true)
+    @GeneratedValue(generator = "UUID", strategy = GenerationType.AUTO)
+    private UUID id;
     private String email;
-
     private String password;
-
-    @Indexed
     private boolean active;
-
-    @TextIndexed
     @CreatedDate
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
-
-    @TextIndexed
     @LastModifiedDate
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 }
